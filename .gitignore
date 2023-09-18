@@ -1,0 +1,7 @@
+*.cmd
+Module.symvers
+modules.order
+*.ko
+*.o
+*.mod*
+test_dvkm
