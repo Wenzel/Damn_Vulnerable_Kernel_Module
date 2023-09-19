@@ -71,7 +71,7 @@ int Use_after_free_IOCTL_Handler(struct dvkm_obj *io)
 		INFO("[+] **Data** Copy from user failed..\n");
 		return 0;
 	}	
-	INFO("[+] data: %s\n", kernel_data_buffer);			
+	INFO("[+] data: %.50s\n", kernel_data_buffer);
 	kfree(kernel_data_buffer);
 	//trigger use after free
 	kernel_data_buffer = "A";
@@ -102,7 +102,7 @@ int Double_free_IOCTL_Handler(struct dvkm_obj *io)
 		INFO("[+] **Data** Copy from user failed..\n");
 		return 0;
 	}	
-	INFO("[+] data: %s\n", kernel_data_buffer);			
+	INFO("[+] data: %.50s\n", kernel_data_buffer);
 	kfree(kernel_data_buffer);
 	//trigger double free
 	kfree(kernel_data_buffer);
@@ -138,7 +138,7 @@ int Heap_Buffer_Overflow_IOCTL_Handler(struct dvkm_obj *io)
 		INFO("[+] **Data** Copy from user failed..\n");
 		return 0;
 	}	
-	INFO("[+] data: %s\n", kernel_data_buffer);	
+	INFO("[+] data: %.50s\n", kernel_data_buffer);
 	memcpy(kernel_buffer,kernel_data_buffer,k_dvkm_obj.datasize);
 	kfree(kernel_buffer);
 	kfree(kernel_data_buffer);
@@ -169,7 +169,7 @@ int Heap_OOBR_IOCTL_Handler(struct dvkm_obj *io)
 		INFO("[+] **Data** Copy from user failed..\n");
 		return 0;
 	}	
-	INFO("[+] data: %s\n", kernel_data_buffer);		
+	INFO("[+] data: %.50s\n", kernel_data_buffer);
 	//trigger oobr
 	data = kernel_data_buffer + k_dvkm_obj.datasize + 20;
 	kfree(kernel_data_buffer);
@@ -199,7 +199,7 @@ int Heap_OOBW_IOCTL_Handler(struct dvkm_obj *io)
 		INFO("[+] **Data** Copy from user failed..\n");
 		return 0;
 	}	
-	INFO("[+] data: %s\n", kernel_data_buffer);		
+	INFO("[+] data: %.50s\n", kernel_data_buffer);
 	//trigger oobw
 	kernel_data_buffer[k_dvkm_obj.datasize+20] = 'A';
 	kfree(kernel_data_buffer);
@@ -231,7 +231,7 @@ noinline int Stack_Buffer_Overflow_IOCTL_Handler(struct dvkm_obj *io)
 		INFO("[+] **Data** Copy from user failed..\n");
 		return 0;
 	}	
-	INFO("[+] data: %s\n", k_dvkm_obj.data);	
+	INFO("[+] data: %.50s\n", k_dvkm_obj.data);
 	memcpy(kernel_buffer,kernel_data_buffer,k_dvkm_obj.datasize);	
 	kfree(kernel_data_buffer);
 	return 0;
@@ -263,7 +263,7 @@ noinline int Stack_OOBR_IOCTL_Handler(struct dvkm_obj *io)
 		INFO("[+] **Data** Copy from user failed..\n");
 		return 0;
 	}	
-	INFO("[+] data: %s\n", k_dvkm_obj.data);	
+	INFO("[+] data: %.50s\n", k_dvkm_obj.data);
 	memcpy(kernel_buffer,kernel_data_buffer,BUFFER_LEN);
 	//trigger oobr
 	data = kernel_buffer[BUFFER_LEN+20];	
@@ -297,7 +297,7 @@ noinline int Stack_OOBW_IOCTL_Handler(struct dvkm_obj *io)
 		INFO("[+] **Data** Copy from user failed..\n");
 		return 0;
 	}	
-	INFO("[+] data: %s\n", k_dvkm_obj.data);	
+	INFO("[+] data: %.50s\n", k_dvkm_obj.data);
 	memcpy(kernel_buffer,kernel_data_buffer,BUFFER_LEN);
 	//trigger oobw
 	kernel_buffer[BUFFER_LEN+20] = 'A';
@@ -342,7 +342,7 @@ int Integer_Overflow_IOCTL_Handler(struct dvkm_obj *io)
 	INFO("[+] width: %d\n", width);
 	INFO("[+] Height: %d\n", height);
 	INFO("[+] datasize: %d\n", k_dvkm_obj.datasize);
-	INFO("[+] data: %s\n", kernel_data_buffer);	
+	INFO("[+] data: %.50s\n", kernel_data_buffer);
 
 	size = size + width + height; //integer overflow here
 
@@ -392,7 +392,7 @@ int Integer_Underflow_IOCTL_Handler(struct dvkm_obj *io)
 	INFO("[+] width: %d\n", width);
 	INFO("[+] Height: %d\n", height);
 	INFO("[+] datasize: %d\n", k_dvkm_obj.datasize);
-	INFO("[+] data: %s\n", kernel_data_buffer);	
+	INFO("[+] data: %.50s\n", kernel_data_buffer);
 
 	size = size - width - height; //integer underflow here
 
